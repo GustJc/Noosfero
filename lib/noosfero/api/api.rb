@@ -58,6 +58,13 @@ module Noosfero
 
       mount Session
 
+      add_swagger_documentation(
+        mount_path: '/swagger_doc',
+        hide_format: true,
+        hide_documentation_path: true,
+        api_version: 'v1'
+      )
+
       # hook point which allow plugins to add Grape::API extensions to API::API
       #finds for plugins which has api mount points classes defined (the class should extends Grape::API)
       @plugins = Noosfero::Plugin.all.map { |p| p.constantize }
@@ -72,6 +79,7 @@ module Noosfero
       def self.endpoint_unavailable?(endpoint, environment)
         api_class = endpoint.options[:app] || endpoint.options[:for]
         if api_class.present?
+          return false if api_class.name.deconstantize.empty?
           klass = api_class.name.deconstantize.constantize
           return klass < Noosfero::Plugin && !environment.plugin_enabled?(klass)
         end

@@ -21,6 +21,7 @@ Noosfero::Application.routes.draw do
   # You can have the root of your site routed by hooking up ''
   root to: 'home#index', constraints: EnvironmentDomainConstraint.new, via: :all
 
+  mount GrapeSwaggerRails::Engine => '/api/v1'
   match 'site(/:action)', controller: 'home', via: :all
   match 'api(/:action)', controller: 'api', via: :all
 
