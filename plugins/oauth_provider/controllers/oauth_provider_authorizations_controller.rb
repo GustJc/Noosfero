@@ -6,4 +6,7 @@ class OauthProviderAuthorizationsController < Doorkeeper::AuthorizationsControll
   def index
   end
 
+  def show
+  end
+
 end

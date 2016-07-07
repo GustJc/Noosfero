@@ -2,7 +2,8 @@ module Doorkeeper
   class ApplicationController < ApplicationController
 
     include Helpers::Controller
-    helper 'doorkeeper/form_errors'
+
+    helper 'doorkeeper/dashboard'
 
   end
 end
